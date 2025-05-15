@@ -19,7 +19,7 @@ function NewPost({ onCancel, onAddPost }) {
         body: enteredBody,
         author: enteredAuthor
       };
-      onAddPost(); // these props yield functions
+      onAddPost(postData); // these props yield functions
       onCancel();
     }
 
