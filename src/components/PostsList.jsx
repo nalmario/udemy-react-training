@@ -2,12 +2,29 @@ import Post from './Post'
 import NewPost from './NewPost';
 import classes from './PostsList.module.css';
 import Modal from './Modal'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function PostsList({isPosting, onStopPosting}) {
   const [posts, setPosts] = useState([]) // store list of posts, update when new post
 
+  useEffect(() => {
+    async function fetchPosts() {
+      const response = await fetch('http://localhost:8080/posts')
+      const resData = await response.json();
+      setPosts(resData.posts);
+    }
+
+    fetchPosts();
+  }, []);
+
   function addPostHandler(postData) {
+    fetch('http://localhost:8080/posts', { // port and location found in backend
+      method: 'POST',
+      body: JSON.stringify(postData),
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    });
     setPosts((existingPosts) => [postData, ...existingPosts]);
   }
 
