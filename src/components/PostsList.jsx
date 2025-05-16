@@ -9,8 +9,6 @@ function PostsList({isPosting, onStopPosting}) {
   const [ isFetching, setIsFetching ] = useState(false); // used for conditional rendering
 
 
-
-
   useEffect(() => {
     async function fetchPosts() {
       setIsFetching(true);
