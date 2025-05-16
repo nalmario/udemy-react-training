@@ -1,10 +1,8 @@
-import Post from './Post'
-import NewPost from './NewPost';
+import Post from './Post';
 import classes from './PostsList.module.css';
-import Modal from './Modal'
 import { useState, useEffect } from 'react';
 
-function PostsList({isPosting, onStopPosting}) {
+function PostsList() {
   const [posts, setPosts] = useState([]) // store list of posts, update when new post
   const [ isFetching, setIsFetching ] = useState(false); // used for conditional rendering
 
@@ -34,11 +32,6 @@ function PostsList({isPosting, onStopPosting}) {
 
   return (
     <>
-      {isPosting && (
-        <Modal onClose={onStopPosting}>
-          <NewPost onCancel={onStopPosting} onAddPost={addPostHandler}/>
-        </Modal>
-      )}
       {!isFetching && posts.length > 0 && ( // conditional rendering
       <ul className={classes.posts}>
         {posts.map((post) => <Post key={post.body} author={post.author} body={post.body} />)}
